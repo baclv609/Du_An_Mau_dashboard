@@ -28,7 +28,7 @@
                 <a href="index.php?act=listDm"
                     class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-gift me-2"></i>Danh Mục</a>
-                <a href="index.php?act=DsBl"
+                <a href="index.php?act=dsbl"
                     class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-comment-dots me-2"></i>Bình luận</a>
                 <a href="index.php?act=dskh"

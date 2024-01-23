@@ -3,6 +3,7 @@ include("../model/connect.php");
 include("../model/danhmuc.php");
 include("../model/sanpham.php");
 include("../model/taikhoan.php");
+include("../model/binhluan.php");
 include("header.php");
 // control panel
 if (isset($_GET["act"])) {
@@ -76,18 +77,14 @@ if (isset($_GET["act"])) {
 
                 $filename = $_FILES["image"]["name"];
 
-                // print_r([$tenSanPham, $price, $moTa, $luotXem, $id_danhMuc]);
-                // insert_sanpham($tenSanPham, $price, $moTa, $luotXem, $id_danhMuc,$image,$filename);
                 $target_dir = "../uploads/";
                 $target_file = $target_dir . basename($_FILES["image"]["name"]);
 
                 if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-
                     $sql = "INSERT INTO sanpham(tenSanPham, price, image, moTa, id_danhMuc) 
                 VALUES ('$tenSanPham','$price','$filename','$moTa','$id_danhMuc')";
                     pdo_execute($sql);
                 }
-
                 $thongBao = "Thêm thành công";
             }
             $listDm = list_danhmuc();
@@ -179,6 +176,12 @@ if (isset($_GET["act"])) {
         case 'dskh':
             $listTk = list_Alltaikhoan();
             include("taikhoan/listTaiKhoan.php");
+            break;
+        case 'dsbl':
+            $listBinhluan = select_binhluan();
+            // print_r($listBinhluan);
+            // die();
+            include("binhluan/listBinhluan.php");
             break;
         default:
             # code...

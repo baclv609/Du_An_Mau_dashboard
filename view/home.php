@@ -41,18 +41,20 @@
         <div class="row">
             <?php
             foreach ($spNew as $key => $value) {
+
                 echo '<div class="boxSp mr">
                         <div class="img row">
+                           <a href="index.php?act=sanphamct&idsp=' . $value["id"] . '">
                             <img src="./uploads/' . $value["image"] . '"
                                     alt="">
-                            </div>
+                            </div></a>
                             <p>' . $value["price"] . '</p>
-                            <a href="">' . $value["tenSanPham"] . '</a>
+                            <a href="index.php?act=sanphamct&idsp=' . $value["id"] . '">' . $value["tenSanPham"] . '</a>
                     </div>';
             }
             ?>
 
-           
+
         </div>
     </div>
     <div class="boxright">

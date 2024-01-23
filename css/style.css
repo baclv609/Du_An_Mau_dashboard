@@ -57,8 +57,12 @@
     background-color: black;
     color: #ccc;
     border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
 }
-
+.formSearchHome {
+    padding: 10px 15px;
+}
 .boxleft {
     float: left;
     width: 74%;
@@ -119,7 +123,7 @@
 
 .boxSp {
     float: left;
-    width: 32%;
+    width: 30%;
     min-height: 300px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -127,17 +131,19 @@
 }
 
 .boxSp .img img {
-    min-height: 250px;
+    height: 250px;
     text-align: center;
 }
 
 .boxSp .img img {
     width: 100%;
 }
-
+.img-boxSp {
+    height: 200px;
+}
 
 .menu ul {
-    padding: 10px 15px;
+    /* padding: 10px 15px; */
 }
 
 .menu ul li {
@@ -153,8 +159,6 @@
 
 .menu ul li a:hover {
     color: white;
-    /* font-size: 0.8vw;
-    transition: 0.5s; */
 }
 
 /* formLogin */
@@ -229,14 +233,17 @@
 }
 
 /* searchBox */
-.searchBox input[type="text"] {
+/* .searchBox input[type="text"] {
     width: 100%;
     padding: 5px 10px;
     background-color: #FFF;
     border: 1px #ccc solid;
     border: 15px;
+} */
+.searchBox {
+    display: flex;
+    justify-content: space-between;
 }
-
 /* top10 */
 .top10 img {
     width: 20%;
@@ -302,32 +309,12 @@
     padding: 20px;
     background: #ccc;
 }
-
-/* .formDanhsach_loai table th:nth-child(1){
-    width: 10%;
-    padding: 20px;
-    background: #ccc;
-}
-.formDanhsach_loai table th:nth-child(2){
-    width: 30%;
-    background: #ccc;
-
-}
-.formDanhsach_loai table th:nth-child(3){
-    width: 40%;
-    background: #ccc;
-}
-.formDanhsach_loai table th:nth-child(4){
-    width: 20%;
-    background: #ccc;
-} */
 .formDanhsach_loai table td {
     padding: 10px 20px;
     border: 1px solid #999;
 
 }
 
-/*  */
 /* Thêm hiệu ứng hover cho menu li */
 .menu ul li:hover a {
     color: white;

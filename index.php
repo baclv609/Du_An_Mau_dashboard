@@ -70,9 +70,11 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
                     $_SESSION['user'] = $checkuser;
                     // $thongBao = "Đã nhập thành công";   
                     header("Location: index.php");
+                    // var_dump($_SESSION['user']);
+                    // echo $_SESSION['user'];
+                    // die();
                 } else {
                     $thongBao = "Tài khoản không tồn tại";
-
                 }
                 $thongBao = "Đã đăng ký thành công. Vui lòng đăng nhập để thực hiện bình luận!";
             }

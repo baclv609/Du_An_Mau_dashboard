@@ -22,4 +22,10 @@
                     <li><a href="index.php?act=gopy">Góp ý</a></li>
                     <li><a href="index.php?act=hoidap">Hỏi đáp</a></li>
                 </ul>
+                <div class="formSearchHome" >
+                    <form action="index.php?act=sanpham" method="post">
+                        <input type="text" name="kyw" placeholder="Tìm kiếm sản phẩm">
+                        <input type="submit" name="submit">
+                    </form>
+                </div>
             </div>

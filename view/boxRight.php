@@ -12,7 +12,7 @@
             <li><a href="index.php?act=quenmk">Quên mật khẩu</a></li>
             <li><a href="index.php?act=edit_taikhoan">Cập nhật tài khoản</a></li>
 
-            <?php if ($role == 1) { ?> 
+            <?php if ($role == 1) { ?>
                 <!-- check nếu là 1 thì hiện admin -->
                 <li><a href="admin/index.php">Đăng nhập admin</a></li>
             <?php } ?>
@@ -51,14 +51,13 @@
                 echo '<li><a href="index.php?act=sanpham&iddm=' . $value["id"] . '">' . $value["tenDanhMuc"] . '</a></li>';
             }
             ?>
-            <!-- <li><a href="#">Đong ho</a></li>
-                    <li><a href="#">Đong ho</a></li> -->
+
         </ul>
     </div>
     <div class="boxFooter searchBox">
-        <form action="index.php?act=sanpham" method="post">
-            <input type="text" name="kyw" placeholder="search here...">
-            <input type="submit" name="submit" value="Tìm kiếm">
+        <form action="index.php?act=sanpham" method="post" >
+            <input type="text" name="kyw" placeholder="Tìm kiếm loại hàng">
+            <input type="submit" name="submit" value="Tìm">
         </form>
     </div>
 </div>
@@ -67,7 +66,7 @@
     <div class="boxContent row">
         <?php
         foreach ($dsTop10 as $key => $value) {
-            # code...
+            # code... 
             echo '<div class="row mb10 top10">
                             <img src="./uploads/' . $value["image"] . '"
                                 alt="">
@@ -75,11 +74,7 @@
                         </div>';
         }
         ?>
-        <!-- <div class="row mb10 top10">
-                    <img src="https://mattana.com.vn/uploads/products/2272/ao_so_mi_nam_dai_tay_slimfit_mau_tim_nhat_1.jpg"
-                        alt="">
-                    <a href="#">Áo sơ mi nam dài tay</a>
-                </div> -->
+
     </div>
 </div>
 </div>
