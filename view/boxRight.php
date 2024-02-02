@@ -9,6 +9,7 @@
                 <?php echo $user ?>
             </div>
 
+            <li><a href="index.php?act=mybill">Đơn hàng của tôi</a></li>
             <li><a href="index.php?act=quenmk">Quên mật khẩu</a></li>
             <li><a href="index.php?act=edit_taikhoan">Cập nhật tài khoản</a></li>
 

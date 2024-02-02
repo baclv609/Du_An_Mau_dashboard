@@ -19,7 +19,8 @@
                 // $i++;
                 echo '
                     <tr>
-                        <td>' . $value[3] . '</td>
+                        <td><img style="width: 110px; height:70px" alt="loading..." src="./uploads/' . $value[3] . '"
+                        alt=""></td>
                         <td>' . $value[1] . '</td>
                         <td>' . $value[2] . '</td>
                         <td>' . $value[4] . '</td>

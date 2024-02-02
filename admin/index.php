@@ -4,6 +4,7 @@ include("../model/danhmuc.php");
 include("../model/sanpham.php");
 include("../model/taikhoan.php");
 include("../model/binhluan.php");
+include("../model/cart.php");
 include("header.php");
 
 // control panel
@@ -160,7 +161,31 @@ if (isset($_GET["act"])) {
             }
             $listBinhluan = select_binhluan();
             include("binhluan/listBinhluan.php");
+            break;
+        // bill
+        case 'listBill':
+            if (isset($_POST["searchDH"])) {
+                $searchDH = $_POST["searchDH"];
+            } else {
+                $searchDH = "";
+            }
+            // echo $searchDH;
+            // die;
+            $listBill = loadall_bill($searchDH, 0);
+            include("donHang/listBill.php");
+            break;
 
+        // thongKe
+        case 'thongKe':
+            $listthongKe = list_thongKe();
+            include("thongke/listthongKe.php");
+            break;
+        case 'bieudo':
+            $listthongKe = list_thongKe();
+            // echo "<pre>";
+            // var_dump([$listthongKe]);
+            // die;
+            include("thongke/bieudo.php");
             break;
         default:
             include("home.php");

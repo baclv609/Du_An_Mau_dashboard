@@ -60,12 +60,12 @@ function tongDH()
     }
 
 }
-function insert_bill($user, $adress, $email, $tel, $ngayDatHang, $tongDH, $phuongThucTT)
+function insert_bill($id_User, $user, $adress, $email, $tel, $ngayDatHang, $tongDH, $phuongThucTT)
 {
     $sql = "INSERT INTO bill
-    ( bill_adress, bill_email, bill_tel, bill_user, bill_ngayDatHang, bill_phuongThucTT, tongDH) 
+    (id_User, bill_adress, bill_email, bill_tel, bill_user, bill_ngayDatHang, bill_phuongThucTT, tongDH) 
     VALUES 
-    ('$adress','$email','$tel','$user','$ngayDatHang','$phuongThucTT','$tongDH')";
+    ('$id_User','$adress','$email','$tel','$user','$ngayDatHang','$phuongThucTT','$tongDH')";
     return pdo_execute_return_lastInsertId($sql);
 
     // trả về id oder
@@ -87,6 +87,58 @@ function loadOne_bill($id)
 function loadall_cart($idBill)
 {
     $sql = "SELECT * FROM cart WHERE idBill = $idBill";
+    $bill = pdo_query($sql);
+    return $bill;
+}
+function loadall_cart_count($idBill)
+{
+    $sql = "SELECT * FROM cart WHERE idBill = $idBill";
+    $bill = pdo_query($sql);
+    return sizeof($bill);
+}
+function loadall_bill($searchDH = "", $idUser)
+{
+    $sql = "SELECT * FROM bill WHERE 1";
+    // nếu có id_User thì lọc theo id_User
+    //  còn không thì select * form
+    if ($idUser > 0)
+        $sql .= " AND id_User = $idUser";
+    if ($searchDH != "")
+        $sql .= " AND id like '%$searchDH%'";
+
+    $sql .= " order by id desc";
+    $bill_list = pdo_query($sql);
+    return $bill_list;
+}
+function get_tranhThaiDH($status)
+{
+    switch ($status) {
+        case 0:
+            $trangThai = "Đơn hàng mới";
+            break;
+        case 1:
+            $trangThai = "Đang xử lý";
+            break;
+        case 2:
+            $trangThai = "Đang giao hàng";
+            break;
+        case 3:
+            $trangThai = "Đã Giao Hàng";
+            break;
+        default:
+            $trangThai = "Đang cập nhật";
+            break;
+    }
+    return $trangThai;
+}
+function list_thongKe()
+{
+    $sql = "SELECT danhmuc.tenDanhMuc, COUNT(sanpham.id) AS countSP,
+    MIN(sanpham.price) AS minSP, MAX(sanpham.price) AS maxSP, AVG(sanpham.price)
+FROM sanpham
+LEFT JOIN danhmuc ON danhmuc.id = sanpham.id_danhMuc
+GROUP BY danhmuc.id
+ORDER BY danhmuc.id DESC;";
     $bill = pdo_query($sql);
     return $bill;
 }

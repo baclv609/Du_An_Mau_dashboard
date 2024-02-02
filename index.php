@@ -178,6 +178,10 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
         case 'billComfirm':
             // tạo bill
             if ((isset($_POST["dongydathang"])) && ($_POST["dongydathang"])) {
+                if (isset($_SESSION['user']))
+                    $id_User = $_SESSION['user']['id'];
+                else
+                    $id = 0;
                 $user = $_POST["user"];
                 $adress = $_POST["adress"];
                 $email = $_POST["email"];
@@ -186,11 +190,8 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
                 $ngayDatHang = date("h:i:sa d/m/y");
                 $tongDH = tongDH();
 
-                // echo  "<pre>";
-                // var_dump([$user,$adress,$email,$tel,$phuongThucTT,$ngayDatHang,$tongDH]);
-                // die;
-                $idBill = insert_bill($user, $adress, $email, $tel, $ngayDatHang, $tongDH, $phuongThucTT);
-            
+                $idBill = insert_bill($id_User, $user, $adress, $email, $tel, $ngayDatHang, $tongDH, $phuongThucTT);
+
                 // insert into bảng cart: $_SESSION['myCart']
 
                 // tạo đơn hàng + tạo giỏ hàng
@@ -200,11 +201,15 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
                 }
                 $_SESSION['myCart'] = [];
             }
-            
+            $bill =  loadOne_bill($idBill);
             $billCT = loadall_cart($idBill);
+            // echo '<pre>';
+            // var_dump([$billCT]);
+            // die;
             include("view/card/billComfirm.php");
             break;
         case 'mybill':
+            $list_bill = loadall_bill($_SESSION['user']['id']);
             include("view/card/mybill.php");
             break;
         default:
