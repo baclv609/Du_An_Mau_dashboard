@@ -50,10 +50,20 @@
                             </div></a>
                             <p>' . $value["price"] . '</p>
                             <a href="index.php?act=sanphamct&idsp=' . $value["id"] . '">' . $value["tenSanPham"] . '</a>
+                           
+                            <div class="row">
+                                     <form action="index.php?act=addToCard" method="post">
+                                     <input type="hidden" name="id" value="' . $value["id"] . '">
+                                         <input type="hidden" name="image" value="' . $value["image"] . '">
+                                         <input type="hidden" name="price" value=" ' . $value["price"] . ' ">
+                                         <input type="hidden" name="tenSanPham" value=" ' . $value["tenSanPham"] . ' ">
+
+                                         <input type="submit" name="submit" value="Them vao gio hang">
+                                     </form>
+                            </div>
                     </div>';
             }
             ?>
-
 
         </div>
     </div>

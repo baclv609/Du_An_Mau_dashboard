@@ -7,10 +7,24 @@
                 <form action="index.php?act=dangky" method="post" class="formLogin">
                     email
                     <input type="email" name="email"><br>
+                    <!-- validate -->
+                    <span style="color: red">
+                        <?= $errDangKyemail  ?>
+                    </span> <br>
+
                     user
                     <input type="text" name="user"><br>
+                    <!-- validate -->
+                    <span style="color: red">
+                        <?= $errDangKyuser  ?>
+                    </span> <br>
+
                     password
                     <input type="password" name="password"> <br>
+                    <!-- validate -->
+                    <span style="color: red">
+                        <?=  $errDangKypass  ?>
+                    </span> <br>
                     <input type="submit" name="dangky" value="Đăng ký">
                     <input type="reset" value="Nhập lại">
                 </form>

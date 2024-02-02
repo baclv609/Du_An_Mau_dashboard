@@ -31,8 +31,6 @@
             </div>
         </div>
 
-
-
         <div class="col my-3">
             <table id="example" class="table table-striped" style="width:100%">
                 <thead class="table bg-white rounded shadow-sm table-hover">
@@ -49,23 +47,23 @@
                 </thead>
                 <tbody>
                     <?php
-                    if (isset($listSp) && is_array($listSp)) {
+                    if (!empty($listSp)) {
                         foreach ($listSp as $value) {
                             echo '
-                            <tr>
-                                <td class="bg-white">#</td>
-                                <th scope="row" class="bg-white">' . $value['id'] . '</th>
-                                <td class="bg-white">' . $value['tenSanPham'] . '</td>
-                                <td class="bg-white"><img src="../uploads/' . $value["image"] . '" style="width: 110px; height:70px" alt="loading..."></td>
-                                <td class="bg-white">' . $value['price'] . '</td>
-                                <td class="bg-white">' . $value['luotXem'] . '</td>
-                                <td class="bg-white">' . $value['tenDanhMuc'] . '</td>
-                                <td class="bg-white"><a class="btn btn-warning" href="index.php?act=editSp&id=' . $value['id'] . '">Sửa</a>  <a  class="btn btn-danger" href="index.php?act=deleteSp&id=' . $value['id'] . '">Xóa</a></td>
-                            </tr>
-                            ';
+                                 <tr>
+                                     <td class="bg-white">#</td>
+                                     <th scope="row" class="bg-white">' . $value['id'] . '</th>
+                                     <td class="bg-white">' . $value['tenSanPham'] . '</td>
+                                     <td class="bg-white"><img src="../uploads/' . $value["image"] . '" style="width: 110px; height:70px" alt="loading..."></td>
+                                     <td class="bg-white">' . $value['price'] . '</td>
+                                     <td class="bg-white">' . $value['luotXem'] . '</td>
+                                     <td class="bg-white">' . $value['tenDanhMuc'] . '</td>
+                                     <td class="bg-white"><a class="btn btn-warning" href="index.php?act=editSp&id=' . $value['id'] . '">Sửa</a>  
+                                     <a  class="btn btn-danger" href="index.php?act=deleteSp&id=' . $value['id'] . '" onclick="return confirm(\'Bạn muốn xóa ?\')">Xóa</a></td>
+                                 </tr>';
                         }
                     } else {
-                        echo "No data available";
+                        echo '<tr><td colspan="8" style="text-align: center">No data available</td></tr>';
                     }
                     ?>
                 </tbody>

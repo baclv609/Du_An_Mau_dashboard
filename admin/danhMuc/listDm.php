@@ -19,16 +19,23 @@
                 <th>#</th>
             </tr>
             <?php
-            foreach ($listDm as $value) {
-                echo '
-                <tr>
-                    <td scope="row">#</td>
-                    <td>' . $value['id'] . '</td>
-                    <td>' . $value['tenDanhMuc'] . '</td>
-                    <td><a href="index.php?act=editDm&id=' . $value['id'] . '"><input type="button" value="Sửa"></a>  <a href="index.php?act=deleteDm&id=' . $value['id'] . '"><input type="button" value="Xóa"></a></td>
-                </tr>
-                ';
+            if (!empty($listDm)) {
+                foreach ($listDm as $value) {
+                    echo '
+                             <tr>
+                                 <td scope="row">#</td>
+                                 <td>' . $value['id'] . '</td>
+                                 <td>' . $value['tenDanhMuc'] . '</td>
+                                 <td><a href="index.php?act=editDm&id=' . $value['id'] . '"><input type="button" value="Sửa"></a> 
+                                  <a href="index.php?act=deleteDm&id=' . $value['id'] . '" onclick="return confirm(\'Bạn muốn xóa ?\')"><input type="button" value="Xóa"></a></td>
+                             </tr>
+                                    ';
+                }
+            } else {
+                echo '<tr><td colspan="4" style="text-align: center">No data available</td></tr>';
             }
+
+
             ?>
 
         </table>

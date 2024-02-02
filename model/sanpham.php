@@ -1,8 +1,9 @@
 <?php
-function insert_sanpham($tenSanPham, $price, $moTa, $luotXem, $id_danhMuc, $image, $filename)
+function insert_sanpham($tenSanPham, $price, $moTa, $id_danhMuc, $filename)
 {
-    // $sql = "INSERT INTO sanpham(tenSanPham) VALUES ('$tenLoai')";
-    // pdo_execute($sql);
+    $sql = "INSERT INTO sanpham(tenSanPham, price, image, moTa, id_danhMuc) 
+    VALUES ('$tenSanPham','$price','$filename','$moTa','$id_danhMuc')";
+    pdo_execute($sql);
 }
 function delete_sanpham($id)
 {
@@ -69,5 +70,27 @@ function update_sanpham($id, $tenLoai)
                 SET tenSanPham='$tenLoai' WHERE id = $id";
     pdo_execute($sql);
 }
+function update_sanpham_coHinhAnh($tenSanPham, $price, $filename, $moTa, $id_danhMuc, $id)
+{
+    $sql = "UPDATE sanpham SET 
+    tenSanPham='$tenSanPham',
+    price='$price',
+    image='$filename',
+    moTa='$moTa',
+    id_danhMuc='$id_danhMuc'
+     WHERE  id='$id'";
+    pdo_execute($sql);
+}
 
+function update_sanpham_KhongHinhAnh($tenSanPham, $price, $moTa, $id_danhMuc, $id)
+{
+    $sql = "UPDATE sanpham SET 
+    tenSanPham='$tenSanPham',
+    price='$price',
+    moTa='$moTa',
+    id_danhMuc='$id_danhMuc'
+     WHERE  id='$id'";
+    pdo_execute($sql);
+
+}
 ?>

@@ -3,25 +3,36 @@ session_start();
 include("model/connect.php");
 include("model/danhmuc.php");
 include("model/sanpham.php");
+include("model/cart.php");
 include("model/taikhoan.php");
 include("view/header.php");
+
 $spNew = listAll_sanpham_Home();
 $dsDanhMuc = list_danhmuc();
 $dsTop10 = listAll_sanpham_Top10();
+
+$errDangNhappass = "";
+$errDangNhapuser = "";
+
+$errDangKypass = "";
+$errDangKyuser = "";
+$errDangKyemail = "";
+
+
+if (!isset($_SESSION['myCart'])) {
+    $_SESSION['myCart'] = [];
+}
 
 if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
     $act = $_GET["act"];
     switch ($act) {
         case 'gioithieu':
-            # code...
             include("view/gioithieu.php");
             break;
         case 'lienhe':
-            # code...
             include("view/lienhe.php");
             break;
         case 'sanphamct':
-            # code...
             if ((isset($_GET["idsp"])) && ($_GET["idsp"]) > 0) {
                 $id = $_GET["idsp"];
                 $sanPhamCt = edit_sanpham($id);
@@ -37,27 +48,37 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
             } else {
                 $kyw = "";
             }
-            # code...
             if ((isset($_GET["iddm"])) && ($_GET["iddm"]) > 0) {
                 $iddm = $_GET["iddm"];
-                // echo $iddm;
             } else {
                 $iddm = 0;
             }
             $listSp = list_sanpham($kyw, $iddm);
-            // echo "<pre>";
-            // var_dump([$listSp]);
             include("view/sanpham.php");
             break;
-
         case 'dangky':
             // nếu có tồn tại và có nhấp vào nút dangky
             if ((isset($_POST["dangky"])) && ($_POST["dangky"])) {
                 $email = $_POST["email"];
                 $user = $_POST["user"];
                 $pass = $_POST["password"];
-                insert_taiKhoan($user, $pass, $email);
-                $thongBao = "Đã đăng ký thành công. Vui lòng đăng nhập để thực hiện bình luận!";
+
+                if (empty($user)) {
+                    $errDangKyuser = "Nhập user";
+                    $isCheck = false;
+                }
+                if (empty($user)) {
+                    $errDangKyemail = "Nhập email";
+                    $isCheck = false;
+                }
+                if (empty($email)) {
+                    $errDangKypass = "Nhập pass";
+                    $isCheck = false;
+                }
+                if ($isCheck) {
+                    insert_taiKhoan($user, $pass, $email);
+                    $thongBao = "Đã đăng ký thành công. Vui lòng đăng nhập để thực hiện bình luận!";
+                }
             }
             include("view/taikhoan/dangky.php");
             break;
@@ -65,18 +86,28 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
             if ((isset($_POST["dangnhap"])) && ($_POST["dangnhap"])) {
                 $user = $_POST["user"];
                 $pass = $_POST["password"];
-                $checkuser = checkUser($user, $pass);
-                if (is_array($checkuser)) { // nếu có 1 mảng thì tb bạn đã đăng nhập thành công   
-                    $_SESSION['user'] = $checkuser;
-                    // $thongBao = "Đã nhập thành công";   
-                    header("Location: index.php");
-                    // var_dump($_SESSION['user']);
-                    // echo $_SESSION['user'];
-                    // die();
-                } else {
-                    $thongBao = "Tài khoản không tồn tại";
+                $isCheck = true; // Khởi tạo biến $isCheck với giá trị mặc định là true
+
+                if (empty($user)) {
+                    $errDangNhapuser = "Nhập user";
+                    $isCheck = false;
                 }
-                $thongBao = "Đã đăng ký thành công. Vui lòng đăng nhập để thực hiện bình luận!";
+                if (empty($pass)) {
+                    $errDangNhappass = "Nhập pass";
+                    $isCheck = false;
+                }
+
+                if ($isCheck) {
+                    $checkuser = checkUser($user, $pass);
+                    if (is_array($checkuser)) {
+                        // nếu có 1 mảng thì tức là bạn đã đăng nhập thành công
+                        $_SESSION['user'] = $checkuser;
+                        header("Location: index.php");
+                        exit(); // Thêm câu lệnh exit() để dừng thực hiện mã nguồn tiếp theo
+                    } else {
+                        $thongBao = "Tài khoản không tồn tại";
+                    }
+                }
             }
             include("view/taikhoan/dangky.php");
             break;
@@ -114,10 +145,70 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
 
         // Khách hàng
 
-        default:
-            # code...
-            include("view/home.php");
+        case 'addToCard':
+            if ((!empty($_POST["submit"])) && ($_POST["submit"])) {
+                $id = $_POST["id"];
+                $tenSanPham = $_POST["tenSanPham"];
+                $price = $_POST["price"];
+                $image = $_POST["image"];
+                $soLuong = 1;
+                $thanhTien = $soLuong * $price;
 
+                // $thanhTien = 2;
+                $ArrCart = [$id, $tenSanPham, $price, $image, $soLuong, $thanhTien];
+                // them  $ArrCart vao mang
+
+                array_push($_SESSION['myCart'], $ArrCart);
+            }
+            include("view/card/viewCard.php");
+            break;
+        case 'deleteCard':
+            if (isset($_GET["idCard"])) {
+                $id = $_GET["idCard"];
+                array_splice($_SESSION['myCart'], $id, 1);
+            } else {
+                $_SESSION['myCart'] = [];
+            }
+            include("view/card/viewCard.php");
+            break;
+
+        case 'bill':
+            include("view/card/bill.php");
+            break;
+        case 'billComfirm':
+            // tạo bill
+            if ((isset($_POST["dongydathang"])) && ($_POST["dongydathang"])) {
+                $user = $_POST["user"];
+                $adress = $_POST["adress"];
+                $email = $_POST["email"];
+                $tel = $_POST["tel"];
+                $phuongThucTT = $_POST["phuongThucTT"];
+                $ngayDatHang = date("h:i:sa d/m/y");
+                $tongDH = tongDH();
+
+                // echo  "<pre>";
+                // var_dump([$user,$adress,$email,$tel,$phuongThucTT,$ngayDatHang,$tongDH]);
+                // die;
+                $idBill = insert_bill($user, $adress, $email, $tel, $ngayDatHang, $tongDH, $phuongThucTT);
+            
+                // insert into bảng cart: $_SESSION['myCart']
+
+                // tạo đơn hàng + tạo giỏ hàng
+                foreach ($_SESSION['myCart'] as $ArrCart) {
+                    // insert_cart($idUser, $idSp, $name, $price, $img, $soLuong, $thanhTien, $idBill);
+                    insert_cart($_SESSION['user']['id'], $ArrCart[0], $ArrCart[1], $ArrCart[2], $ArrCart[3], $ArrCart[4], $ArrCart[5], $idBill);
+                }
+                $_SESSION['myCart'] = [];
+            }
+            
+            $billCT = loadall_cart($idBill);
+            include("view/card/billComfirm.php");
+            break;
+        case 'mybill':
+            include("view/card/mybill.php");
+            break;
+        default:
+            include("view/home.php");
             break;
     }
 } else {

@@ -19,14 +19,23 @@
 
             <li><a href="index.php?act=logout">Đăng xuất</a></li>
         <?php } else { ?>
+
             <form action="index.php?act=dangnhap" method="post">
                 <div class="row mb10">
                     Tên đăng nhập <br>
                     <input type="text" name="user">
+                    <!-- validate -->
+                    <span style="color: red">
+                        <?= $errDangNhapuser ?>
+                    </span> <br>
                 </div>
                 <div class="row mb10">
                     Mật khẩu <br>
                     <input type="password" name="password"> <br>
+                    <!-- validate -->
+                    <span style="color: red">
+                        <?= $errDangNhappass ?>
+                    </span> <br>
                 </div>
                 <div class="row mb10">
                     <input type="checkbox"> Ghi nhớ tài khoản ? <br>
@@ -35,6 +44,7 @@
                     <input type="submit" name="dangnhap" value="Đăng nhập">
                 </div>
             </form>
+
             <li><a href="">Quên mật khẩu</a></li>
             <li><a href="index.php?act=dangky">Đăng ký thành viên</a></li>
         <?php } ?>
@@ -55,7 +65,7 @@
         </ul>
     </div>
     <div class="boxFooter searchBox">
-        <form action="index.php?act=sanpham" method="post" >
+        <form action="index.php?act=sanpham" method="post">
             <input type="text" name="kyw" placeholder="Tìm kiếm loại hàng">
             <input type="submit" name="submit" value="Tìm">
         </form>

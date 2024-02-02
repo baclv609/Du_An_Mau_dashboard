@@ -37,4 +37,9 @@ function update_taikhoan($id, $user, $pass, $email, $adress, $tel)
     WHERE id='$id'";
     pdo_execute($sql);
 }
+function delete_taikhoan($id)
+{
+    $sql = "DELETE FROM taikhoan WHERE id = $id";
+    pdo_query($sql);
+}
 ?>

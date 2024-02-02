@@ -6,6 +6,8 @@
         <div class="row mb">
             <?php
             extract($sanPhamCt);
+            // echo $id;
+            // die;
             ?>
 
             <div class="boxTitle">Chi tiết sản phẩm
@@ -20,18 +22,19 @@
             </div>
         </div>
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-        <script>
+       
+        <div class="row" id="binhluan"> 
+            <?php //include "view/binhluan/binhluanForm.php" ?>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+            <script>
             $(document).ready(function () {
-                $("#binhluan").load("view/binhluan/binhluanForm.php", { id: <?= $id ?> });
+                $("#binhluan").load("./view/binhluan/binhluanForm.php", { idSp: <?= $id ?> });
             });
-        </script>
-        <div class="row" id="binhluan"> </div>
+            </script>
+        </div>
 
-        <!-- <div class="row">
-    <iframe src="view/binhluan/binhluanForm.php" frameborder="0" width="100%" height="300px"></iframe>
-</div> -->
-
+     
         <div class="row mb">
             <div class="boxTitle">Sản phẩm liên quan</div>
             <div class="boxContent row">
