@@ -42,6 +42,13 @@
                 <a href="../index.php"
                     class="list-group-item list-group-item-action bg-transparent text-danger fw-bold"><i
                         class="fas fa-power-off me-2"></i>Logout</a>
+
+                <a href="index.php?act=tintuc"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-map-marker-alt me-2"></i>Tin tức</a>
+                <a href="index.php?act=thongKe"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-map-marker-alt me-2"></i>Danh mục tin tức</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->

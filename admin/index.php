@@ -5,6 +5,8 @@ include("../model/sanpham.php");
 include("../model/taikhoan.php");
 include("../model/binhluan.php");
 include("../model/cart.php");
+
+include("../model/tintuc.php");
 include("header.php");
 
 // control panel
@@ -34,8 +36,9 @@ if (isset($_GET["act"])) {
             }
             // sau khi xóa xong thì gọi lại trang list danh sách 
             // select lại dữ liệu để trang listDm có giá trị Foreach
-            $sql = "SELECT * FROM danhmuc ORDER BY tenDanhMuc";
-            $listDm = pdo_query($sql);
+            $listDm = list_danhmuc();
+            // $sql = "SELECT * FROM danhmuc ORDER BY tenDanhMuc";
+            // $listDm = pdo_query($sql);
             include("danhMuc/listDm.php");
             break;
         case 'editDm':
@@ -186,6 +189,83 @@ if (isset($_GET["act"])) {
             // var_dump([$listthongKe]);
             // die;
             include("thongke/bieudo.php");
+            break;
+
+        // de thi thu
+        case 'tintuc':
+            $listTintuc = list_tintuc();
+            include("tintuc/listTintuc.php");
+            break;
+
+        case 'addTinTuc':
+            if (isset($_POST['submit'])) {
+                $tieu_de = $_POST["tieu_de"];
+                $noi_dung = $_POST["noi_dung"];
+                $id_danhMuc = $_POST["id_danh_muc"];
+
+                $filename = $_FILES["image"]["name"];
+                $target_dir = "../uploads/";
+                $target_file = $target_dir . basename($_FILES["image"]["name"]);
+
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
+                    insert_TinTuc($tieu_de, $noi_dung, $filename, $id_danhMuc);
+                }
+                $thongBao = "Thêm thành công";
+            }
+            $listdanhmuctintuc = list_danhmuctintuc();
+            include("tintuc/add.php");
+            break;
+        case 'delete_TinTuc':
+            if (isset($_GET["id"]) && ($_GET["id"] > 0)) {
+                $id = $_GET["id"];
+                // echo $id; die;
+                delete_TinTuc($id);
+            }
+            $listTintuc = list_tintuc();
+            include("tintuc/listTintuc.php");
+            break;
+        case 'editTintuc':
+            if (isset($_GET["id"]) && ($_GET["id"] > 0)) {
+                $id = $_GET["id"];
+                $listdanhmuctintuc = list_danhmuctintuc();
+                // $listTintuc = list_tintuc();
+                // echo '<pre>';
+                // var_dump($listTintuc);
+                // die;
+                $list_tintucID = edit_tintuc($id);
+                // echo $list_tintucID['id_danhMuc'];
+                // die;
+            }
+            include("tintuc/edit.php");
+            break;
+        case 'updateTintuc':
+            if (isset($_POST['submit'])) {
+                $id = $_POST["id"];
+                $tieu_de = $_POST["tieu_de"];
+                $noi_dung = $_POST["noi_dung"];
+                $id_danhMuc = $_POST["id_danh_muc"];
+
+
+                $hinhAnh = $_FILES["image"];
+                $filename = $hinhAnh["name"];
+
+                if ($filename) {
+                    $filename = time() . $filename;
+                    $dir = "../uploads/$filename";
+
+                    if (move_uploaded_file($hinhAnh["tmp_name"], $dir)) {
+                        update_Tintuc_coHinhAnh($tieu_de, $noi_dung, $filename, $id_danhMuc,$id);
+                    }
+                } else {
+                    update_Tintuc_KhongHinhAnh($tieu_de, $noi_dung, $id_danhMuc,$id);
+                }
+
+                $thongBao = "Thêm thành công";
+            }
+           
+            $listTintuc = list_tintuc();
+            include("tintuc/listTintuc.php");
+
             break;
         default:
             include("home.php");
