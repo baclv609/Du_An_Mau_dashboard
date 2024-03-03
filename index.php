@@ -62,7 +62,8 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
                 $email = $_POST["email"];
                 $user = $_POST["user"];
                 $pass = $_POST["password"];
-
+                $isCheck = true;
+                
                 if (empty($user)) {
                     $errDangKyuser = "Nhập user";
                     $isCheck = false;
@@ -75,7 +76,7 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
                     $errDangKypass = "Nhập pass";
                     $isCheck = false;
                 }
-                if ($isCheck) {
+                if ($isCheck == true) {
                     insert_taiKhoan($user, $pass, $email);
                     $thongBao = "Đã đăng ký thành công. Vui lòng đăng nhập để thực hiện bình luận!";
                 }
@@ -201,7 +202,7 @@ if ((isset($_GET["act"])) && ($_GET["act"]) != "") {
                 }
                 $_SESSION['myCart'] = [];
             }
-            $bill =  loadOne_bill($idBill);
+            $bill = loadOne_bill($idBill);
             $billCT = loadall_cart($idBill);
             // echo '<pre>';
             // var_dump([$billCT]);

@@ -43,13 +43,13 @@
             foreach ($spNew as $key => $value) {
 
                 echo '<div class="boxSp mr">
-                        <div class="img row">
+                        <div class="img row" >
                            <a href="index.php?act=sanphamct&idsp=' . $value["id"] . '">
                             <img src="./uploads/' . $value["image"] . '"
                                     alt="">
-                            </div></a>
-                            <p>' . $value["price"] . '</p>
-                            <a href="index.php?act=sanphamct&idsp=' . $value["id"] . '">' . $value["tenSanPham"] . '</a>
+                       </div></a>
+                            <p style="text-align: center; padding-top: 10px; color: red" >' . $value["price"] . ' VND</p>
+                            <a style="text-decoration: none; color: black; padding: 12px;" href="index.php?act=sanphamct&idsp=' . $value["id"] . '">' . $value["tenSanPham"] . '</a>
                            
                             <div class="row">
                                      <form action="index.php?act=addToCard" method="post">
@@ -58,10 +58,13 @@
                                          <input type="hidden" name="price" value=" ' . $value["price"] . ' ">
                                          <input type="hidden" name="tenSanPham" value=" ' . $value["tenSanPham"] . ' ">
 
-                                         <input type="submit" name="submit" value="Them vao gio hang">
+                                         <div style="text-align: center;">
+                                         <input type="submit" name="submit" style="display: inline-block; margin: 12px;" value="Thêm vào giỏ hàng">
+                                       </div>
                                      </form>
                             </div>
-                    </div>';
+                    </div>
+                    ';
             }
             ?>
 

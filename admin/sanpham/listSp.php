@@ -57,7 +57,7 @@
                                      <td class="bg-white"><img src="../uploads/' . $value["image"] . '" style="width: 110px; height:70px" alt="loading..."></td>
                                      <td class="bg-white">' . $value['price'] . '</td>
                                      <td class="bg-white">' . $value['luotXem'] . '</td>
-                                     <td class="bg-white">' . $value['tenDanhMuc'] . '</td>
+                                     <td class="bg-white">' . $value['id_danhMuc'] . '</td>
                                      <td class="bg-white"><a class="btn btn-warning" href="index.php?act=editSp&id=' . $value['id'] . '">Sửa</a>  
                                      <a  class="btn btn-danger" href="index.php?act=deleteSp&id=' . $value['id'] . '" onclick="return confirm(\'Bạn muốn xóa ?\')">Xóa</a></td>
                                  </tr>';

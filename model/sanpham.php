@@ -24,10 +24,14 @@ function listAll_sanpham_Top10()
 }
 function list_sanpham($searchName, $id_danhMuc)
 {
-    $sql = "SELECT sanpham.id, tenSanPham, price, image, moTa, luotXem, sanpham.id_danhMuc, danhmuc.tenDanhMuc 
-            FROM sanpham 
-            JOIN danhmuc ON sanpham.id_danhMuc = danhmuc.id
-            WHERE 1";
+    // $sql = "SELECT sanpham.id, tenSanPham, price, image, moTa, luotXem, sanpham.id_danhMuc, danhmuc.tenDanhMuc 
+    //         FROM sanpham 
+    //         JOIN danhmuc ON sanpham.id_danhMuc = danhmuc.id
+    //         WHERE 1";
+
+    $sql = "SELECT sanpham.id, tenSanPham, price, image, moTa, luotXem, sanpham.id_danhMuc
+    FROM sanpham 
+    WHERE 1";
 
     if ($searchName != "") {
         $sql .= " AND tenSanPham LIKE '%" . $searchName . "%'";

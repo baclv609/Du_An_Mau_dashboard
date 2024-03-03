@@ -49,7 +49,7 @@
                 <div class="mb-3">
                     <input type="submit" class="btn btn-primary" name="submit" value="Cap nhat">
                     <input type="reset" class="btn btn-secondary" value="Reset">
-                    <a href="index.php?act=tintuc" class="btn btn-outline-primary">Danh Sách</a>
+                    <a href="index.php?act=listkhoahoc" class="btn btn-outline-primary">Danh Sách</a>
                 </div>
             </form>
         </div>

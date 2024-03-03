@@ -226,20 +226,13 @@
 .menuDoc ul li a {
     color: #666;
     text-decoration: none;
+    
 }
 
 .menuDoc ul li:hover {
     background-color: #ccc;
 }
 
-/* searchBox */
-/* .searchBox input[type="text"] {
-    width: 100%;
-    padding: 5px 10px;
-    background-color: #FFF;
-    border: 1px #ccc solid;
-    border: 15px;
-} */
 .searchBox {
     display: flex;
     justify-content: space-between;

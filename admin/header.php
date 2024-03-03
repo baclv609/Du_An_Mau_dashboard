@@ -49,6 +49,10 @@
                 <a href="index.php?act=thongKe"
                     class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
                         class="fas fa-map-marker-alt me-2"></i>Danh mục tin tức</a>
+
+                        <a href="index.php?act=listkhoahoc"
+                    class="list-group-item list-group-item-action bg-transparent second-text fw-bold"><i
+                        class="fas fa-map-marker-alt me-2"></i>Khoa Học</a>
             </div>
         </div>
         <!-- /#sidebar-wrapper -->
